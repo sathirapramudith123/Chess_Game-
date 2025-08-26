@@ -7,8 +7,8 @@ import javax.swing.JPanel;
 
 public class Gamepannel extends JPanel {
 
-	public static final int WIDTH = 1100;
-	public static final int HEIGHT = 800;
+	public static final int WIDTH = 1010;
+	public static final int HEIGHT = 650;
 	
 	public Gamepannel() {
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
