@@ -15,8 +15,9 @@ public class Main {
 		window.add(gp);
 		window.pack();
 		
-		
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
+		
+		gp.launchGame();
 	}
 }

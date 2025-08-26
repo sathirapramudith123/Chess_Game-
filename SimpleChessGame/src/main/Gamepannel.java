@@ -19,7 +19,7 @@ public class Gamepannel extends JPanel implements Runnable{
 	}
 	
 	
-	public void lunchGame () {
+	public void launchGame () {
 		gameThread = new Thread(this);
 		gameThread.start();
 	}
