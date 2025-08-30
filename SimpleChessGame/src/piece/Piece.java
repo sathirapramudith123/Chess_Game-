@@ -29,7 +29,7 @@ public class Piece {
 	public BufferedImage getImage (String imagePath){
 		BufferedImage image = null;
 		try {
-			image = ImageIO.read(getClass().getResource(imagePath + ".png"));
+			image = ImageIO.read(Piece.class.getResourceAsStream(imagePath + ".png"));
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
