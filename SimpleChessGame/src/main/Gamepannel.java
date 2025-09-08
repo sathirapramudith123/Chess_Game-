@@ -23,10 +23,12 @@ public class Gamepannel extends JPanel implements Runnable{
 	final int FPS = 60;
 	Thread gameThread;
 	Board board = new Board();
+	Mouse mouse = new Mouse();
 	
 	//piece
 	public static ArrayList<Piece> pieces = new ArrayList<>();
 	public static ArrayList<Piece> simPieces = new  ArrayList<>();
+	Piece activeP;
 	
 	//color
 	public static final int WHITE = 0;
@@ -38,6 +40,8 @@ public class Gamepannel extends JPanel implements Runnable{
 	public Gamepannel() {
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		setBackground (Color.black);
+		addMouseMotionListener(mouse);
+		addMouseListener(mouse);
 		
 		setPieces();
 		copyPieces(pieces, simPieces);
@@ -124,6 +128,31 @@ public class Gamepannel extends JPanel implements Runnable{
 	}
 	
 	private void update() {
+		//moused button pressed
+		if(mouse.pressed)
+		{
+			if(activeP == null) 
+			{
+				for(Piece piece : simPieces) 
+				{
+					if(piece.color == currentColor 
+							&& piece.col == mouse.x/Board.SQUARE_SIZE
+							&& piece.row == mouse.y/Board.SQUARE_SIZE)
+					{
+						activeP = piece;
+					}
+				}
+			}else {
+				//player is holding a pieces simulate the move 
+				simulate();
+			}
+		}
+	}
+	
+	private void simulate() {
+		
+		activeP.x = mouse.x -Board.HALF_SQUARE_SIZE;
+		activeP.y = mouse.y - Board.HALF_SQUARE_SIZE;
 		
 	}
 	
