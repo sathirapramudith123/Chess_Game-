@@ -153,6 +153,8 @@ public class Gamepannel extends JPanel implements Runnable{
 		
 		activeP.x = mouse.x -Board.HALF_SQUARE_SIZE;
 		activeP.y = mouse.y - Board.HALF_SQUARE_SIZE;
+		activeP.col = activeP.getCol(activeP.x);
+		activeP.row = activeP.getRow(activeP.y);
 		
 	}
 	
