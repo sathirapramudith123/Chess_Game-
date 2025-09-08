@@ -10,7 +10,7 @@ public class Knight extends Piece {
 		if(color == Gamepannel.WHITE) {
 			image = getImage("/piece/w-knight");
 		}else {
-			image = getImage("/piece/b-kinght");
+			image = getImage("/piece/b-knight");
 		}
 	}
 

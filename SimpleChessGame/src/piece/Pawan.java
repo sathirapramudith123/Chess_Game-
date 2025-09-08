@@ -8,10 +8,9 @@ public class Pawan extends Piece {
 		super(color, col, row);
 		
 		if(color == Gamepannel.WHITE) {
-			image = getImage("/piece/w-pawan");
-		}
-		else {
-			image = getImage("/piece/b-pawan");
+			image = getImage("/piece/w-pawn");
+		}else {
+			image = getImage("/piece/b-pawn");
 		}
 	}
 
