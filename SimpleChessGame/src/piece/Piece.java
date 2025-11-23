@@ -133,7 +133,7 @@ public class Piece {
     		}
     	}
     	//when this piece is moving  up
-    	for(int r = perRow-1; r<targetRow; r--) {
+    	for(int r = perRow-1; r>targetRow; r--) {
     		for(Piece piece : Gamepannel.simPieces) {
     			if(piece.col == targetRow && piece.row == r) {
     				hittingP = piece;
@@ -142,6 +142,14 @@ public class Piece {
     		}
     	}
     	//when this piece is moving  down
+    	for(int r = perRow+1; r<targetRow; r++) {
+    		for(Piece piece : Gamepannel.simPieces) {
+    			if(piece.col == targetRow && piece.row == r) {
+    				hittingP = piece;
+    				return true;
+    			}
+    		}
+    	}
     	return false;
     }
     public void draw(Graphics2D g2) {
