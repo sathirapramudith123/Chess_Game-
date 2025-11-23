@@ -84,6 +84,12 @@ public class Piece {
     	}
     	return false;
     }
+    public boolean isSameSquare(int targetCol, int targetRow) {
+    	if(targetCol == perCol && targetRow == perRow) {
+    		return true;
+    	}
+    	return false;
+    }
     public Piece getHittingP(int targetCol, int targetRow) {
     	for(Piece piece : Gamepannel.simPieces) {
     		if(piece.col == targetCol && piece.row == targetRow && piece != this) {
@@ -106,7 +112,30 @@ public class Piece {
     	
     	return false;
     }
-    
+    public boolean pieceIsOnStraightLine(int targetCol, int targetRow) {
+    	
+    	//when this piece is moving to the left
+    	for(int c = perCol-1; c>targetCol; c--) {
+    		for(Piece piece : Gamepannel.simPieces) {
+    			if(piece.col == c && piece.row == targetRow) {
+    				hittingP = piece;
+    				return true;
+    			}
+    		}
+    	}
+    	//when this piece is moving to the right
+    	for(int c = perCol+1; c>targetCol; c++) {
+    		for(Piece piece : Gamepannel.simPieces) {
+    			if(piece.col == c && piece.row == targetRow) {
+    				hittingP = piece;
+    				return true;
+    			}
+    		}
+    	}
+    	//when this piece is moving  up
+    	//when this piece is moving  down
+    	return false;
+    }
     public void draw(Graphics2D g2) {
         if (image != null) {
             g2.drawImage(image, x, y, Board.SQUARE_SIZE, Board.SQUARE_SIZE, null);
