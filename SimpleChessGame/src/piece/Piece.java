@@ -152,6 +152,56 @@ public class Piece {
     	}
     	return false;
     }
+    
+    public boolean pieceIsOnDiagonalLine(int targetcol, int targetRow) {
+    	
+    	if(targetRow < perRow) {
+    		//up left
+    		for(int c = perCol-1; c > targetcol; c--) {
+    			int diff = Math.abs(c - perCol);
+    			for(Piece piece : Gamepannel.simPieces) {
+    				if(piece.col == c && piece.row == perRow - diff) {
+    					hittingP = piece;
+    					return true;
+    				}
+    			}
+    		}
+    		
+    		//up right
+    		for(int c = perCol+1; c < targetcol; c++) {
+    			int diff = Math.abs(c - perCol);
+    			for(Piece piece : Gamepannel.simPieces) {
+    				if(piece.col == c && piece.row == perRow - diff) {
+    					hittingP = piece;
+    					return true;
+    				}
+    			}
+    		}
+    	}
+    	if(targetRow > perRow) {
+    		//down left
+    		for(int c = perCol-1; c > targetcol; c--) {
+    			int diff = Math.abs(c - perCol);
+    			for(Piece piece : Gamepannel.simPieces) {
+    				if(piece.col == c && piece.row == perRow + diff) {
+    					hittingP = piece;
+    					return true;
+    				}
+    			}
+    		}
+    		//down right
+    		for(int c = perCol+1; c < targetcol; c++) {
+    			int diff = Math.abs(c - perCol);
+    			for(Piece piece : Gamepannel.simPieces) {
+    				if(piece.col == c && piece.row == perRow + diff) {
+    					hittingP = piece;
+    					return true;
+    				}
+    			}
+    		}
+    	}
+    	return false;
+    }
     public void draw(Graphics2D g2) {
         if (image != null) {
             g2.drawImage(image, x, y, Board.SQUARE_SIZE, Board.SQUARE_SIZE, null);
