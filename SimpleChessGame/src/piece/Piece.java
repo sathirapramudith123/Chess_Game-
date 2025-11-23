@@ -52,6 +52,29 @@ public class Piece {
     public int getRow(int y) {
     	return (y + Board.HALF_SQUARE_SIZE)/Board.SQUARE_SIZE;
     }
+    public void updatePostion() {
+    	x = getX(col);
+    	y = getY(row);
+    	perCol = getCol(x);
+    	perRow = getRow(y);
+    	
+    }
+    public void resetPosition() {
+    	col = perCol;
+    	row = perRow;
+    	x = getX(col);
+    	y = getY(row);
+    }
+    public boolean canMove(int tragetCol, int tragetRow) {
+    	return false;
+    }
+    public boolean isWithinBoard(int targetCol, int tragetRow) {
+    	if(targetCol >= 0 && targetCol <= 7 && tragetRow >= 0 && tragetRow <= 7) {
+    		return true;
+    	}
+    	return false;
+    }
+    
     public void draw(Graphics2D g2) {
         if (image != null) {
             g2.drawImage(image, x, y, Board.SQUARE_SIZE, Board.SQUARE_SIZE, null);
