@@ -133,6 +133,14 @@ public class Piece {
     		}
     	}
     	//when this piece is moving  up
+    	for(int r = perRow-1; r<targetRow; r--) {
+    		for(Piece piece : Gamepannel.simPieces) {
+    			if(piece.col == targetRow && piece.row == r) {
+    				hittingP = piece;
+    				return true;
+    			}
+    		}
+    	}
     	//when this piece is moving  down
     	return false;
     }
