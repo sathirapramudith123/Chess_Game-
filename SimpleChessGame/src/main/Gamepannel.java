@@ -178,6 +178,11 @@ public class Gamepannel extends JPanel implements Runnable{
 		
 		if(activeP.canMove(activeP.col, activeP.row)) {
 			canMove =true;
+			
+			//if hitting piece, remove it from the list 
+			if(activeP.hittingP != null) {
+				simPieces.remove(activeP.hittingP.getIndex());
+			}
 			vaildSquare = true;
 		}
 	}

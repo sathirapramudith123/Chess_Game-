@@ -54,6 +54,14 @@ public class Piece {
     public int getRow(int y) {
     	return (y + Board.HALF_SQUARE_SIZE)/Board.SQUARE_SIZE;
     }
+    public int getIndex() {
+    	for(int index = 0; index<Gamepannel.simPieces.size(); index++) {
+    		if(Gamepannel.simPieces.get(index) == this) {
+    			return index;
+    		}
+    	}
+    	return 0;
+    }
     public void updatePostion() {
     	x = getX(col);
     	y = getY(row);
