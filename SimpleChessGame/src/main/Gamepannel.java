@@ -157,8 +157,13 @@ public class Gamepannel extends JPanel implements Runnable{
 		if(mouse.pressed == false) {
 			if(activeP != null) {
 				if(vaildSquare) {
+					//move confirmed
+					//update the piece list in case a piece has been captured and removed during the simulation
+					copyPieces(simPieces, pieces);
 					activeP.updatePostion();
 				}else {
+					//the move is not valid so rest everything
+					copyPieces(pieces, simPieces);
 					activeP.resetPosition();
 					activeP = null;
 				}
@@ -171,6 +176,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		canMove = false;
 		vaildSquare = false;
 		
+		copyPieces(pieces, simPieces);
 		activeP.x = mouse.x -Board.HALF_SQUARE_SIZE;
 		activeP.y = mouse.y - Board.HALF_SQUARE_SIZE;
 		activeP.col = activeP.getCol(activeP.x);
