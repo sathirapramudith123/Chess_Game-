@@ -20,7 +20,9 @@ public class King extends Piece{
 		if(isWithinBoard(tragetCol, tragetRow)) {
 			if(Math.abs(tragetCol - perCol) + Math.abs(tragetRow - perRow) == 1 || 
 					Math.abs(tragetCol - perCol) * Math.abs(tragetRow - perRow) == 1) {
-				return true;
+				if(isVaildSquare(tragetCol, tragetRow)) {
+					return true;
+				}	
 			}
 		}
 		return false;

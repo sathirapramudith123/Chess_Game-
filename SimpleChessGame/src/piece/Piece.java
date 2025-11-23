@@ -86,9 +86,16 @@ public class Piece {
     }
     public boolean isVaildSquare(int targetCol, int targetRow) {
     	hittingP = getHittingP(targetCol, targetRow);
-    	if(hittingP ==null) {
+    	if(hittingP ==null) { //this square is can't
     		return true;
+    	}else { //this square is occupied
+    		if(hittingP.color != this.color) { // if the color is different, it can be captured
+    			return true;
+    		}else {
+    			hittingP = null;
+    		}
     	}
+    	
     	return false;
     }
     
