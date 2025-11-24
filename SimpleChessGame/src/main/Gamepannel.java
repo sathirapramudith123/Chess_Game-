@@ -31,7 +31,8 @@ public class Gamepannel extends JPanel implements Runnable{
 	//piece
 	public static ArrayList<Piece> pieces = new ArrayList<>();
 	public static ArrayList<Piece> simPieces = new  ArrayList<>();
-	Piece activeP;
+	Piece activeP ;
+	public static Piece castlingP; 
 	
 	//color
 	public static final int WHITE = 0;
@@ -72,11 +73,11 @@ public class Gamepannel extends JPanel implements Runnable{
 		pieces.add(new Pawan(WHITE,7,6));
 		pieces.add(new Rook(WHITE,0,7));
 		pieces.add(new Rook(WHITE,7,7));
-		pieces.add(new Knight(WHITE,1,7));
-		pieces.add(new Knight(WHITE,6,7));
-		pieces.add(new Bishop(WHITE,2,7));
-		pieces.add(new Bishop(WHITE,5,7));
-		pieces.add(new Queen(WHITE,3,7));
+		//pieces.add(new Knight(WHITE,1,7));
+		//pieces.add(new Knight(WHITE,6,7));
+		//pieces.add(new Bishop(WHITE,2,7));
+		//pieces.add(new Bishop(WHITE,5,7));
+		//pieces.add(new Queen(WHITE,3,7));
 		pieces.add(new King(WHITE,4,7));
 		
 		
@@ -165,6 +166,9 @@ public class Gamepannel extends JPanel implements Runnable{
 					//update the piece list in case a piece has been captured and removed during the simulation
 					copyPieces(simPieces, pieces);
 					activeP.updatePostion();
+					if(castlingP != null) {
+						castlingP.updatePostion();
+					}
 					
 					changePlayer();
 				}else {
@@ -183,6 +187,15 @@ public class Gamepannel extends JPanel implements Runnable{
 		vaildSquare = false;
 		
 		copyPieces(pieces, simPieces);
+		
+		// rest the castling piece's position
+		if(castlingP != null) {
+			castlingP.col = castlingP.perCol;
+			castlingP.x = castlingP.getX(castlingP.col);
+			castlingP = null; 
+		}
+		
+		
 		activeP.x = mouse.x -Board.HALF_SQUARE_SIZE;
 		activeP.y = mouse.y - Board.HALF_SQUARE_SIZE;
 		activeP.col = activeP.getCol(activeP.x);
@@ -195,7 +208,21 @@ public class Gamepannel extends JPanel implements Runnable{
 			if(activeP.hittingP != null) {
 				simPieces.remove(activeP.hittingP.getIndex());
 			}
+			checkCastling();
+			
 			vaildSquare = true;
+		}
+	}
+	
+	public void checkCastling() {
+		if(castlingP != null) {
+			if(castlingP.col == 0) {
+				castlingP.col += 3;
+			}
+			else if(castlingP.col == 7) {
+				castlingP.col -= 2;
+			}
+			castlingP.x = castlingP.getX(castlingP.col);
 		}
 	}
 	
