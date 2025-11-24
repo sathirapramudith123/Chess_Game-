@@ -159,9 +159,12 @@ public class Gamepannel extends JPanel implements Runnable{
 			if(activeP != null) {
 				if(vaildSquare) {
 					//move confirmed
+					
 					//update the piece list in case a piece has been captured and removed during the simulation
 					copyPieces(simPieces, pieces);
 					activeP.updatePostion();
+					
+					changePlayer();
 				}else {
 					//the move is not valid so rest everything
 					copyPieces(pieces, simPieces);
@@ -192,6 +195,15 @@ public class Gamepannel extends JPanel implements Runnable{
 			}
 			vaildSquare = true;
 		}
+	}
+	
+	public void changePlayer() {
+		if(currentColor == WHITE) {
+			currentColor = BLACK;
+		}else {
+			currentColor = WHITE;
+		}
+		activeP = null;
 	}
 	
 	public void paintComponent(Graphics g) {
