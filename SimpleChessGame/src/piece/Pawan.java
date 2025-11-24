@@ -30,8 +30,20 @@ public class Pawan extends Piece {
 			
 			// 1 square movement 
 			if(targetCol == perCol && targetRow == perRow + moveValue && hittingP == null) {
-				
-			}return true;
+				return true;
+			}
+			
+			// 2 square movement
+			if(targetCol == perCol && targetRow == perRow + moveValue*2 && hittingP == null && moved == false && 
+					pieceIsOnStraightLine(targetCol, targetRow) == false) {
+				return true;
+			}
+			
+			// diagonal movement & capture 
+			if(Math.abs(targetCol - perCol) == 1 &&  targetRow == perRow + moveValue && hittingP != null &&
+					hittingP.color != color) {
+				return true;
+			}
 		}
 		return false;
 	}
