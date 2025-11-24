@@ -50,7 +50,7 @@ public class King extends Piece{
 						if(piece.col == perCol - 4 && piece.row == tragetRow) {
 							p[1] = piece;
 						}
-						if(p[0] == null && p[1].moved == false) {
+						if(p[0] == null && p[1] != null && p[1].moved == false) {
 							Gamepannel.castlingP = p[1];
 							return true;
 						}
