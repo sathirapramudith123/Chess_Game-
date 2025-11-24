@@ -66,6 +66,16 @@ public class Piece {
     	return 0;
     }
     public void updatePostion() {
+    	
+    	// To check En Passant
+    	if(type == Type.PAWN) {
+    		if(Math.abs(row - perRow) == 2) {
+    			twoStepeed = true;
+    		}
+    	}
+    	
+    	
+    	
     	x = getX(col);
     	y = getY(row);
     	perCol = getCol(x);

@@ -1,11 +1,14 @@
 package piece;
 
 import main.Gamepannel;
+import main.Type;
 
 public class Pawan extends Piece {
 
 	public Pawan(int color, int col, int row) {
 		super(color, col, row);
+		
+		type = Type.PAWN;
 		
 		if(color == Gamepannel.WHITE) {
 			image = getImage("/piece/w-pawn");
