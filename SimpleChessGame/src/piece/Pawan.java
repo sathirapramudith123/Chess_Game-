@@ -44,6 +44,9 @@ public class Pawan extends Piece {
 					hittingP.color != color) {
 				return true;
 			}
+			
+			// En Passant rule
+			
 		}
 		return false;
 	}
