@@ -3,8 +3,10 @@ package main;
 import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.util.ArrayList;
 
 import javax.swing.JPanel;
@@ -19,7 +21,7 @@ import piece.Rook;
 
 public class Gamepannel extends JPanel implements Runnable{
 
-	public static final int WIDTH = 1030;
+	public static final int WIDTH = 1111;
 	public static final int HEIGHT = 800;
 	final int FPS = 60;
 	Thread gameThread;
@@ -223,12 +225,23 @@ public class Gamepannel extends JPanel implements Runnable{
 			if(canMove) {
 				g2.setColor(Color.white);
 				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
-				g2.fillRect(activeP.col*Board.SQUARE_SIZE, activeP.row*Board.SQUARE_SIZE, Board.SQUARE_SIZE, Board.SQUARE_SIZE);
+				g2.fillRect(activeP.col * Board.SQUARE_SIZE, activeP.row * Board.SQUARE_SIZE, Board.SQUARE_SIZE, Board.SQUARE_SIZE);
 				g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
 			}
 			
 			// draw the active piece in the end so it won't be hidden by the board or the colored square
 			activeP.draw(g2);
+		}
+		
+		// status messages
+		g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+		g2.setFont(new Font("Book Antiqua", Font.PLAIN,40));
+		g2.setColor(Color.WHITE);
+		
+		if(currentColor == WHITE) {
+			g2.drawString("White's turn", 840, 550);
+		}else {
+			g2.drawString("Black's turn", 840, 250);
 		}
 	}
 	
