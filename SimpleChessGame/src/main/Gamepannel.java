@@ -73,11 +73,11 @@ public class Gamepannel extends JPanel implements Runnable{
 		pieces.add(new Pawan(WHITE,7,6));
 		pieces.add(new Rook(WHITE,0,7));
 		pieces.add(new Rook(WHITE,7,7));
-		//pieces.add(new Knight(WHITE,1,7));
-		//pieces.add(new Knight(WHITE,6,7));
-		//pieces.add(new Bishop(WHITE,2,7));
-		//pieces.add(new Bishop(WHITE,5,7));
-		//pieces.add(new Queen(WHITE,3,7));
+		pieces.add(new Knight(WHITE,1,7));
+		pieces.add(new Knight(WHITE,6,7));
+		pieces.add(new Bishop(WHITE,2,7));
+		pieces.add(new Bishop(WHITE,5,7));
+		pieces.add(new Queen(WHITE,3,7));
 		pieces.add(new King(WHITE,4,7));
 		
 		
@@ -229,6 +229,7 @@ public class Gamepannel extends JPanel implements Runnable{
 	public void changePlayer() {
 		if(currentColor == WHITE) {
 			currentColor = BLACK;
+			//reset black's two stepped status
 			for(Piece piece : pieces) {
 				if(piece.color == BLACK) {
 					piece.twoStepeed = false;
@@ -237,6 +238,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		}
 		else {
 			currentColor = WHITE;
+			//reset white's two stepped status
 			for(Piece piece : pieces) {
 				if(piece.color == WHITE) {
 					piece.twoStepeed = false;

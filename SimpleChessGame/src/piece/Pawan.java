@@ -49,6 +49,14 @@ public class Pawan extends Piece {
 			}
 			
 			// En Passant rule
+			if(Math.abs(targetCol - perCol) == 1 &&  targetRow == perRow + moveValue) {
+				for(Piece piece : Gamepannel.simPieces) {
+					if(piece.col == targetCol && piece.row == perRow && piece.twoStepeed == true) {
+						hittingP = piece;
+						return true;
+					}
+				}
+			}
 			
 		}
 		return false;
