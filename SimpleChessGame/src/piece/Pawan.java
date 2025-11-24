@@ -14,5 +14,26 @@ public class Pawan extends Piece {
 		}
 	}
 
+	public boolean canMove(int targetCol, int targetRow) {
+		
+		if(isWithinBoard(targetCol, targetRow) && isSameSquare(targetCol, targetRow) == false) {
+			//define the move value base on its color 
+			int moveValue;
+			if(color == Gamepannel.WHITE) {
+				moveValue = -1;
+			}else {
+				moveValue = 1;
+			}
+			
+			//check the hittingP piece
+			hittingP = getHittingP(targetCol,targetRow);
+			
+			// 1 square movement 
+			if(targetCol == perCol && targetRow == perRow + moveValue && hittingP == null) {
+				
+			}return true;
+		}
+		return false;
+	}
 	
 }
