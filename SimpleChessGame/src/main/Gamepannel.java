@@ -139,6 +139,8 @@ public class Gamepannel extends JPanel implements Runnable{
 	private void update() {
 		
 		if(promotion) {
+	
+		}else {
 			//mouse button pressed
 			if(mouse.pressed)
 			{
@@ -187,8 +189,6 @@ public class Gamepannel extends JPanel implements Runnable{
 					}
 				}
 			}
-		}else {
-			
 		}
 		
 		
