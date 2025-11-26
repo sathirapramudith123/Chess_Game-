@@ -51,7 +51,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		addMouseListener(mouse);
 		
 		testPromotion();
-		setPieces();
+		//setPieces();
 		copyPieces(pieces, simPieces);
 	}
 	
@@ -107,7 +107,8 @@ public class Gamepannel extends JPanel implements Runnable{
 	}
 	
 	public void testPromotion() {
-		pieces.add(new Pawan(WHITE,0,4));
+		pieces.add(new Pawan(WHITE,0,3));
+		pieces.add(new Pawan(BLACK,5,4));
 	}
 	private void copyPieces(ArrayList<Piece> source, ArrayList<Piece> target) {
 		
@@ -319,10 +320,12 @@ public class Gamepannel extends JPanel implements Runnable{
 						Board.SQUARE_SIZE, Board.SQUARE_SIZE, null);
 			}
 		}
-		if(currentColor == WHITE) {
-			g2.drawString("White's turn", 840, 550);
-		}else {
-			g2.drawString("Black's turn", 840, 250);
+		else {
+			if(currentColor == WHITE) {
+				g2.drawString("White's turn", 840, 550);
+			}else {
+				g2.drawString("Black's turn", 840, 250);
+			}
 		}
 	}
 	
