@@ -50,6 +50,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		addMouseMotionListener(mouse);
 		addMouseListener(mouse);
 		
+		testPromotion();
 		setPieces();
 		copyPieces(pieces, simPieces);
 	}
@@ -105,6 +106,9 @@ public class Gamepannel extends JPanel implements Runnable{
 		
 	}
 	
+	public void testPromotion() {
+		pieces.add(new Pawan(WHITE,0,4));
+	}
 	private void copyPieces(ArrayList<Piece> source, ArrayList<Piece> target) {
 		
 		target.clear();
@@ -139,8 +143,9 @@ public class Gamepannel extends JPanel implements Runnable{
 	private void update() {
 		
 		if(promotion) {
-	
-		}else {
+			promoting();
+		}
+		else {
 			//mouse button pressed
 			if(mouse.pressed)
 			{
@@ -190,9 +195,6 @@ public class Gamepannel extends JPanel implements Runnable{
 				}
 			}
 		}
-		
-		
-
 	}
 	
 	private void simulate() {
@@ -276,6 +278,10 @@ public class Gamepannel extends JPanel implements Runnable{
 		}
 		return false;
 	}
+	
+	public void promoting() {
+		
+	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
@@ -306,6 +312,13 @@ public class Gamepannel extends JPanel implements Runnable{
 		g2.setFont(new Font("Book Antiqua", Font.PLAIN,40));
 		g2.setColor(Color.WHITE);
 		
+		if(promotion) {
+			g2.drawString("Promote to:", 840, 150);
+			for(Piece piece :  promoPieces) {
+				g2.drawImage(piece.image, piece.getX(piece.col), piece.getY(piece.row),
+						Board.SQUARE_SIZE, Board.SQUARE_SIZE, null);
+			}
+		}
 		if(currentColor == WHITE) {
 			g2.drawString("White's turn", 840, 550);
 		}else {
