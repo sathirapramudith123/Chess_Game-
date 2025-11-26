@@ -31,6 +31,7 @@ public class Gamepannel extends JPanel implements Runnable{
 	//piece
 	public static ArrayList<Piece> pieces = new ArrayList<>();
 	public static ArrayList<Piece> simPieces = new  ArrayList<>();
+	ArrayList<Piece> promoPieces = new ArrayList<>();
 	Piece activeP ;
 	public static Piece castlingP; 
 	
@@ -42,7 +43,7 @@ public class Gamepannel extends JPanel implements Runnable{
 	//boolean
 	boolean canMove;
 	boolean vaildSquare;
-	
+	boolean promotion;
 	public Gamepannel() {
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		setBackground (Color.black);
@@ -248,6 +249,19 @@ public class Gamepannel extends JPanel implements Runnable{
 		activeP = null;
 	}
 	
+	public boolean canPromote() {
+		
+		if(activeP.type == Type.PAWN) {
+			if(currentColor == WHITE && activeP.row == 0 ||  currentColor == BLACK && activeP.row == 7) {
+				promoPieces.clear();
+				promoPieces.add(new Rook(currentColor,9,2));
+				promoPieces.add(new Knight(currentColor,9,3));
+				promoPieces.add(new Bishop(currentColor,9,4));
+				promoPieces.add(new Queen(currentColor,9,5));
+			}
+		}
+		return false;
+	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
