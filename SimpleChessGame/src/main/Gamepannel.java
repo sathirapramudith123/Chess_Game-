@@ -137,49 +137,62 @@ public class Gamepannel extends JPanel implements Runnable{
 	}
 	
 	private void update() {
-		//mouse button pressed
-		if(mouse.pressed)
-		{
-			if(activeP == null) 
-				//if the activeP is null, check if you can pick up a piece 
+		
+		if(promotion) {
+			//mouse button pressed
+			if(mouse.pressed)
 			{
-				for(Piece piece : simPieces) 
+				if(activeP == null) 
+					//if the activeP is null, check if you can pick up a piece 
 				{
-					// if the mouse is on an ally piece, pick it up as the activeP
-					if(piece.color == currentColor 
-							&& piece.col == mouse.x/Board.SQUARE_SIZE
-							&& piece.row == mouse.y/Board.SQUARE_SIZE)
+					for(Piece piece : simPieces) 
 					{
-						activeP = piece;
+						// if the mouse is on an ally piece, pick it up as the activeP
+						if(piece.color == currentColor 
+								&& piece.col == mouse.x/Board.SQUARE_SIZE
+								&& piece.row == mouse.y/Board.SQUARE_SIZE)
+						{
+							activeP = piece;
+						}
+					}
+				}else {
+					//player is holding a pieces simulate the move 
+					simulate();
+				}
+			}
+			
+			if(mouse.pressed == false) {
+				if(activeP != null) {
+					if(vaildSquare) {
+						//move confirmed
+						
+						//update the piece list in case a piece has been captured and removed during the simulation
+						copyPieces(simPieces, pieces);
+						activeP.updatePostion();
+						if(castlingP != null) {
+							castlingP.updatePostion();
+						}
+						
+						if(canPromote()) {
+							promotion = true;
+						}else {
+							changePlayer();
+						}
+						
+					}else {
+						//the move is not valid so rest everything
+						copyPieces(pieces, simPieces);
+						activeP.resetPosition();
+						activeP = null;
 					}
 				}
-			}else {
-				//player is holding a pieces simulate the move 
-				simulate();
 			}
+		}else {
+			
 		}
 		
-		if(mouse.pressed == false) {
-			if(activeP != null) {
-				if(vaildSquare) {
-					//move confirmed
-					
-					//update the piece list in case a piece has been captured and removed during the simulation
-					copyPieces(simPieces, pieces);
-					activeP.updatePostion();
-					if(castlingP != null) {
-						castlingP.updatePostion();
-					}
-					
-					changePlayer();
-				}else {
-					//the move is not valid so rest everything
-					copyPieces(pieces, simPieces);
-					activeP.resetPosition();
-					activeP = null;
-				}
-			}
-		}
+		
+
 	}
 	
 	private void simulate() {
@@ -258,6 +271,7 @@ public class Gamepannel extends JPanel implements Runnable{
 				promoPieces.add(new Knight(currentColor,9,3));
 				promoPieces.add(new Bishop(currentColor,9,4));
 				promoPieces.add(new Queen(currentColor,9,5));
+				return true;
 			}
 		}
 		return false;
