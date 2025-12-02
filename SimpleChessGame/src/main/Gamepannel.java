@@ -192,14 +192,14 @@ public class Gamepannel extends JPanel implements Runnable{
 							castlingP.updatePostion();
 						}
 						
-						if(IsKingInCheck) {
-							
+						if(isKingInCheck()) {
+							//possible game over
+						}
+				
+						if(canPromote()) {
+							promotion = true;
 						}else {
-							if(canPromote()) {
-								promotion = true;
-							}else {
-								changePlayer();
-							}
+							changePlayer();
 						}
 						
 						
@@ -274,11 +274,20 @@ public class Gamepannel extends JPanel implements Runnable{
 	}
 	
 	
-	public boolean IsKingInCheck() {
+	private boolean isKingInCheck() {
 		
+		Piece king = getKing(true);
+		
+		if(activeP.canMove(king.col, king.row)) {
+			checkingP = activeP;
+			return true;
+		}else {
+			checkingP = null;
+		}
 		return false;
 		
 	}
+	
 	private Piece getKing(boolean opponent) {
 		
 		Piece king = null;
@@ -288,7 +297,8 @@ public class Gamepannel extends JPanel implements Runnable{
 				if(piece.type == Type.KING && piece.color != currentColor) {
 					king = piece;
 				}
-			}else {
+			}
+			else {
 				if(piece.type == Type.KING && piece.color == currentColor) {
 					king = piece;
 				}
@@ -402,8 +412,18 @@ public class Gamepannel extends JPanel implements Runnable{
 		else {
 			if(currentColor == WHITE) {
 				g2.drawString("White's turn", 840, 550);
+				if(checkingP != null && checkingP.color == BLACK) {
+					g2.setColor(Color.red);
+					g2.drawString("The King", 840, 650);
+					g2.drawString("is in check!", 840, 700);
+				}
 			}else {
 				g2.drawString("Black's turn", 840, 250);
+				if(checkingP != null && checkingP.color == WHITE) {
+					g2.setColor(Color.red);
+					g2.drawString("The King", 840, 100);
+					g2.drawString("is in check!", 840, 150);
+				}
 			}
 		}
 	}
