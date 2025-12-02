@@ -32,7 +32,7 @@ public class Gamepannel extends JPanel implements Runnable{
 	public static ArrayList<Piece> pieces = new ArrayList<>();
 	public static ArrayList<Piece> simPieces = new  ArrayList<>();
 	ArrayList<Piece> promoPieces = new ArrayList<>();
-	Piece activeP ;
+	Piece activeP, checkingP ;
 	public static Piece castlingP; 
 	
 	//color
@@ -44,6 +44,8 @@ public class Gamepannel extends JPanel implements Runnable{
 	boolean canMove;
 	boolean vaildSquare;
 	boolean promotion;
+	boolean gameover;
+	
 	public Gamepannel() {
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
 		setBackground (Color.black);
@@ -190,11 +192,17 @@ public class Gamepannel extends JPanel implements Runnable{
 							castlingP.updatePostion();
 						}
 						
-						if(canPromote()) {
-							promotion = true;
+						if(IsKingInCheck) {
+							
 						}else {
-							changePlayer();
+							if(canPromote()) {
+								promotion = true;
+							}else {
+								changePlayer();
+							}
 						}
+						
+						
 						
 					}else {
 						//the move is not valid so rest everything
@@ -234,6 +242,7 @@ public class Gamepannel extends JPanel implements Runnable{
 			if(activeP.hittingP != null) {
 				simPieces.remove(activeP.hittingP.getIndex());
 			}
+			
 			checkCastling();
 			
 			if(isIllegal(activeP) == false) {
@@ -251,6 +260,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		}
 		return false;
 	}
+	
 	public void checkCastling() {
 		if(castlingP != null) {
 			if(castlingP.col == 0) {
@@ -263,6 +273,29 @@ public class Gamepannel extends JPanel implements Runnable{
 		}
 	}
 	
+	
+	public boolean IsKingInCheck() {
+		
+		return false;
+		
+	}
+	private Piece getKing(boolean opponent) {
+		
+		Piece king = null;
+		
+		for(Piece piece : simPieces) {
+			if(opponent) {
+				if(piece.type == Type.KING && piece.color != currentColor) {
+					king = piece;
+				}
+			}else {
+				if(piece.type == Type.KING && piece.color == currentColor) {
+					king = piece;
+				}
+			}
+		}
+		return king;
+	}
 	public void changePlayer() {
 		if(currentColor == WHITE) {
 			currentColor = BLACK;
@@ -340,7 +373,9 @@ public class Gamepannel extends JPanel implements Runnable{
 					g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
 					g2.fillRect(activeP.col * Board.SQUARE_SIZE, activeP.row * Board.SQUARE_SIZE, Board.SQUARE_SIZE, Board.SQUARE_SIZE);
 					g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
-				}else {
+				}
+				else
+				{
 					g2.setColor(Color.white);
 					g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
 					g2.fillRect(activeP.col * Board.SQUARE_SIZE, activeP.row * Board.SQUARE_SIZE, Board.SQUARE_SIZE, Board.SQUARE_SIZE);
