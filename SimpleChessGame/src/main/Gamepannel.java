@@ -242,7 +242,7 @@ public class Gamepannel extends JPanel implements Runnable{
 			
 			checkCastling();
 			
-			if(isIllegal(activeP) == false) {
+			if(isIllegal(activeP) == false && opponentCanCaptureKing() == false) {
 				vaildSquare = true;
 			}
 		}
@@ -386,7 +386,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		
 		if(activeP != null) {
 			if(canMove) {
-				if(isIllegal(activeP) == false) {
+				if(isIllegal(activeP) == opponentCanCaptureKing()) {
 					g2.setColor(Color.gray);
 					g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.7f));
 					g2.fillRect(activeP.col * Board.SQUARE_SIZE, activeP.row * Board.SQUARE_SIZE, Board.SQUARE_SIZE, Board.SQUARE_SIZE);
