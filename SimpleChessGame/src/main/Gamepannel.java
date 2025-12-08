@@ -200,10 +200,7 @@ public class Gamepannel extends JPanel implements Runnable{
 							promotion = true;
 						}else {
 							changePlayer();
-						}
-						
-						
-						
+						}	
 					}else {
 						//the move is not valid so rest everything
 						copyPieces(pieces, simPieces);
@@ -250,7 +247,7 @@ public class Gamepannel extends JPanel implements Runnable{
 			}
 		}
 	}
-	public boolean isIllegal(Piece king) {
+	private boolean isIllegal(Piece king) {
 		if(king.type == Type.KING) {
 			for(Piece piece : simPieces) {
 				if(piece != king && piece.color != king.color && piece.canMove(king.col, king.row)) {
@@ -261,7 +258,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		return false;
 	}
 	
-	public void checkCastling() {
+	private void checkCastling() {
 		if(castlingP != null) {
 			if(castlingP.col == 0) {
 				castlingP.col += 3;
@@ -273,6 +270,17 @@ public class Gamepannel extends JPanel implements Runnable{
 		}
 	}
 	
+	private boolean opponentCanCaptureKing() {
+		
+		Piece king  = getKing(false);
+		
+		for(Piece piece : simPieces) {
+				if(piece.color != king.color && piece.canMove(king.col, king.row)) {
+					return true;
+				}
+		}
+		return false;
+	}
 	
 	private boolean isKingInCheck() {
 		
