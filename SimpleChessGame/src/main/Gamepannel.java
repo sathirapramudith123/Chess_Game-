@@ -295,6 +295,17 @@ public class Gamepannel extends JPanel implements Runnable{
 						}
 					}
 				}
+				
+				if(checkingP.row > king.row) {
+					//checking pieces is below the king
+					for(int row = checkingP.row; row > king.row; row--) {
+						for(Piece piece : simPieces) {
+							if(piece != king && piece.color != currentColor && piece.canMove(checkingP.col, row)) {
+								return false;
+							}
+						}
+					}
+				}
 			}else if(rowDiff == 0) {
 				//checking pieces is attacking horizontally
 			}else if(colDiff == rowDiff) {
