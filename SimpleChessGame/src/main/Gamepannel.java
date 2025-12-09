@@ -276,10 +276,53 @@ public class Gamepannel extends JPanel implements Runnable{
 	
 	private boolean kingCanMove(Piece king) {
 		
+		// simulate if there is any square where the king can move to 
+		if(isValidMove(king, -1, -1)) {
+			return true;
+		}
+		if(isValidMove(king, 0, -1)) {
+			return true;
+		}
+		if(isValidMove(king, 1, -1)) {
+			return true;
+		}
+		if(isValidMove(king, -1, 0)) {
+			return true;
+		}
+		if(isValidMove(king, 1, 0)) {
+			return true;
+		}
+		if(isValidMove(king, -1, 1)) {
+			return true;
+		}
+		if(isValidMove(king, 0, -1)) {
+			return true;
+		}
+		if(isValidMove(king, 1, 1)) {
+			return true;
+		}
+		
+		return false;
 	}
 	
 	private boolean isValidMove(Piece king, int colPlus, int rowPlus) {
+		boolean isValidMove = false;
+		king.col += colPlus;
+		king.row += rowPlus;
 		
+		if(king.canMove(king.col, king.row)) {
+			if(king.hittingP != null) {
+				simPieces.remove(king.hittingP.getIndex());
+			}
+			if(isIllegal(king) == false) {
+				isValidMove = true;
+			}
+		}
+		
+		king.resetPosition();
+		copyPieces(pieces, simPieces);
+		
+		return isValidMove;
 	}
 	
 	private boolean opponentCanCaptureKing() {
