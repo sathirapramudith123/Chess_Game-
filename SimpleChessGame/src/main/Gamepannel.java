@@ -270,6 +270,18 @@ public class Gamepannel extends JPanel implements Runnable{
 		}
 	}
 	
+	private boolean isCheckmate() {
+		
+	}
+	
+	private boolean kingCanMove(Piece king) {
+		
+	}
+	
+	private boolean isValidMove(Piece king, int colPlus, int rowPlus) {
+		
+	}
+	
 	private boolean opponentCanCaptureKing() {
 		
 		Piece king  = getKing(false);
