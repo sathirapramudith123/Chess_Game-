@@ -271,7 +271,39 @@ public class Gamepannel extends JPanel implements Runnable{
 	}
 	
 	private boolean isCheckmate() {
+		Piece king  = getKing(true);
+		if(kingCanMove(king)) {
+			return false;
+		}
 		
+		else {
+			// but you still have a chance
+			//check if you can block the attack with your pieces
+			
+			//check the position of the checking piece and the king in check
+			int colDiff = Math.abs(checkingP.col - king.col);
+			int rowDiff = Math.abs(checkingP.row - king.row);
+			
+			if(colDiff == 0) {
+				//checking pieces is attacking vertically
+				if(checkingP.row < king.row) {
+					for(int row = checkingP.row; row < king.row; row++) {
+						for(Piece piece : simPieces) {
+							if(piece != king && piece.color != currentColor && piece.canMove(checkingP.col, row)) {
+								return false;
+							}
+						}
+					}
+				}
+			}else if(rowDiff == 0) {
+				//checking pieces is attacking horizontally
+			}else if(colDiff == rowDiff) {
+				//checking pieces is attacking diagonally
+			}else {
+				//checking pieces is king
+			}
+		}
+		return true;
 	}
 	
 	private boolean kingCanMove(Piece king) {
@@ -307,6 +339,8 @@ public class Gamepannel extends JPanel implements Runnable{
 	
 	private boolean isValidMove(Piece king, int colPlus, int rowPlus) {
 		boolean isValidMove = false;
+		
+		// update the king position
 		king.col += colPlus;
 		king.row += rowPlus;
 		
@@ -319,6 +353,7 @@ public class Gamepannel extends JPanel implements Runnable{
 			}
 		}
 		
+		// rest the king positions and restore the remove piece 
 		king.resetPosition();
 		copyPieces(pieces, simPieces);
 		
