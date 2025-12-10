@@ -308,8 +308,18 @@ public class Gamepannel extends JPanel implements Runnable{
 				}
 			}else if(rowDiff == 0) {
 				//checking pieces is attacking horizontally
+				if(checkingP.col < king.col) {
+					for(int row = checkingP.row; row < king.row; row++) {
+						for(Piece piece : simPieces) {
+							if(piece != king && piece.color != currentColor && piece.canMove(checkingP.col, row)) {
+								return false;
+							}
+						}
+					}
+				}
 			}else if(colDiff == rowDiff) {
 				//checking pieces is attacking diagonally
+				
 			}else {
 				//checking pieces is king
 			}
