@@ -311,9 +311,9 @@ public class Gamepannel extends JPanel implements Runnable{
 				//checking pieces is attacking horizontally
 				if(checkingP.col <	 king.col) {
 					// the checking piece is to the left
-					for(int row = checkingP.row; row < king.row; row++) {
+					for(int col = checkingP.col; col < king.col; col++) {
 						for(Piece piece : simPieces) {
-							if(piece != king && piece.color != currentColor && piece.canMove(checkingP.col, row)) {
+							if(piece != king && piece.color != currentColor && piece.canMove(col, checkingP.row)) {
 								return false;
 							}
 						}
@@ -321,9 +321,9 @@ public class Gamepannel extends JPanel implements Runnable{
 				}
 				if(checkingP.col > king.col) {
 					// the checking piece is to the right
-					for(int row = checkingP.row; row < king.row; row--) {
+					for(int col = checkingP.col; col > king.col; col--) {
 						for(Piece piece : simPieces) {
-							if(piece != king && piece.color != currentColor && piece.canMove(checkingP.col, row)) {
+							if(piece != king && piece.color != currentColor && piece.canMove(col, checkingP.row)) {
 								return false;
 							}
 						}
