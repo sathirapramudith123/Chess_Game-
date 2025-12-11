@@ -287,6 +287,7 @@ public class Gamepannel extends JPanel implements Runnable{
 			if(colDiff == 0) {
 				//checking pieces is attacking vertically
 				if(checkingP.row < king.row) {
+					// the checking piece is above the king
 					for(int row = checkingP.row; row < king.row; row++) {
 						for(Piece piece : simPieces) {
 							if(piece != king && piece.color != currentColor && piece.canMove(checkingP.col, row)) {
@@ -309,6 +310,7 @@ public class Gamepannel extends JPanel implements Runnable{
 			}else if(rowDiff == 0) {
 				//checking pieces is attacking horizontally
 				if(checkingP.col >	 king.col) {
+					// the checking piece is to the left
 					for(int row = checkingP.row; row < king.row; row++) {
 						for(Piece piece : simPieces) {
 							if(piece != king && piece.color != currentColor && piece.canMove(checkingP.col, row)) {
@@ -318,7 +320,8 @@ public class Gamepannel extends JPanel implements Runnable{
 					}
 				}
 				if(checkingP.col < king.col) {
-					for(int row = checkingP.row; row < king.row; row++) {
+					// the checking piece is to the right
+					for(int row = checkingP.row; row < king.row; row--) {
 						for(Piece piece : simPieces) {
 							if(piece != king && piece.color != currentColor && piece.canMove(checkingP.col, row)) {
 								return false;
