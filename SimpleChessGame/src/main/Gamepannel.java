@@ -604,6 +604,18 @@ public class Gamepannel extends JPanel implements Runnable{
 				}
 			}
 		}
+		
+		if(gameover) {
+			String s = "";
+			if(currentColor == WHITE) {
+				s = "White Wins";
+			}else {
+				s = "Black Wins";
+			}
+			g2.setFont(new Font("Arial", Font.PLAIN, 90));
+			g2.setColor(Color.green);
+			g2.drawString(s, 200, 420);
+		}
 	}
 	
 	
