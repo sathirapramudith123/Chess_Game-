@@ -16,10 +16,10 @@ The goal is to demonstrate object-oriented design and game logic implementation 
 
 ## 🧩 Features
 
-✔ Standard chess rules (piece movement, capturing)
-✔ Turn-based gameplay for two players
-✔ Console-based or basic GUI interface *(update this if GUI exists)*
-✔ Clear project structure and reusable code
+✔ Standard chess rules (piece movement, capturing) <br>
+✔ Turn-based gameplay for two players <br>
+✔ Console-based or basic GUI interface *(update this if GUI exists)* <br>
+✔ Clear project structure and reusable code <br>
 
 ## 🚀 Getting Started
 
