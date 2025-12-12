@@ -157,7 +157,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		if(promotion) {
 			promoting();
 		}
-		else {
+		else if(gameover == false){
 			//mouse button pressed
 			if(mouse.pressed)
 			{
@@ -192,15 +192,15 @@ public class Gamepannel extends JPanel implements Runnable{
 							castlingP.updatePostion();
 						}
 						
-						if(isKingInCheck()) {
-							//possible game over
-						}
-				
-						if(canPromote()) {
-							promotion = true;
+						if(isKingInCheck() && isCheckmate()) {
+							gameover = true;
 						}else {
-							changePlayer();
-						}	
+							if(canPromote()) {
+								promotion = true;
+							}else {
+								changePlayer();
+							}
+						}		
 					}else {
 						//the move is not valid so rest everything
 						copyPieces(pieces, simPieces);
