@@ -45,6 +45,7 @@ public class Gamepannel extends JPanel implements Runnable{
 	boolean vaildSquare;
 	boolean promotion;
 	boolean gameover;
+	boolean stalemate;
 	
 	public Gamepannel() {
 		setPreferredSize(new Dimension(WIDTH,HEIGHT));
@@ -157,7 +158,7 @@ public class Gamepannel extends JPanel implements Runnable{
 		if(promotion) {
 			promoting();
 		}
-		else if(gameover == false){
+		else if(gameover == false && stalemate == false){
 			//mouse button pressed
 			if(mouse.pressed)
 			{
@@ -194,7 +195,10 @@ public class Gamepannel extends JPanel implements Runnable{
 						
 						if(isKingInCheck() && isCheckmate()) {
 							gameover = true;
-						}else {
+						}else if(isStalemate() && isKingInCheck() == false) {
+							stalemate = true;
+						}
+						else {
 							if(canPromote()) {
 								promotion = true;
 							}else {
@@ -253,6 +257,23 @@ public class Gamepannel extends JPanel implements Runnable{
 				if(piece != king && piece.color != king.color && piece.canMove(king.col, king.row)) {
 					return true;
 				}
+			}
+		}
+		return false;
+	}
+	
+	private boolean isStalemate() {
+		int count = 0 ;
+		// count the number of piece
+		for(Piece piece : simPieces) {
+			if(piece.color != currentColor) {
+				count++;
+			}
+		}
+		// if only one piece (the king) is left
+		if(count == 1) {
+			if(kingCanMove(getKing(true)) == false) {
+				return true;
 			}
 		}
 		return false;
@@ -615,6 +636,12 @@ public class Gamepannel extends JPanel implements Runnable{
 			g2.setFont(new Font("Arial", Font.PLAIN, 90));
 			g2.setColor(Color.green);
 			g2.drawString(s, 200, 420);
+		}
+		
+		if(stalemate) {
+			g2.setFont(new Font("Arial", Font.PLAIN, 90));
+			g2.setColor(Color.lightGray);
+			g2.drawString("Stalemate", 200, 420);
 		}
 	}
 	
