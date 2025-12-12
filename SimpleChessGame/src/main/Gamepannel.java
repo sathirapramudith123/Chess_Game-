@@ -359,6 +359,13 @@ public class Gamepannel extends JPanel implements Runnable{
 					// the checking piece is below the king
 					if(checkingP.col < king.col) {
 						// the checking piece is in the lower left
+						for(int col = checkingP.col, row = checkingP.row; col<king.col; col++, row--) {
+							for(Piece piece : simPieces) {
+								if(piece != king && piece.color != currentColor && piece.canMove(col, row)) {
+									return false;
+								}
+							}
+						}
 					}
 					if(checkingP.col > king.col) {
 						// the checking piece is in the lower right
